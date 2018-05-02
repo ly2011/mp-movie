@@ -1,28 +1,28 @@
-var path = require('path')
-var fs = require('fs')
-var utils = require('./utils')
-var config = require('../config')
-var vueLoaderConfig = require('./vue-loader.conf')
-var MpvuePlugin = require('webpack-mpvue-asset-plugin')
-var glob = require('glob')
+var path = require('path');
+var fs = require('fs');
+var utils = require('./utils');
+var config = require('../config');
+var vueLoaderConfig = require('./vue-loader.conf');
+var MpvuePlugin = require('webpack-mpvue-asset-plugin');
+var glob = require('glob');
 
-function resolve (dir) {
-  return path.join(__dirname, '..', dir)
+function resolve(dir) {
+  return path.join(__dirname, '..', dir);
 }
 
-function getEntry (rootSrc, pattern) {
-  var files = glob.sync(path.resolve(rootSrc, pattern))
+function getEntry(rootSrc, pattern) {
+  var files = glob.sync(path.resolve(rootSrc, pattern));
   return files.reduce((res, file) => {
-    var info = path.parse(file)
-    var key = info.dir.slice(rootSrc.length + 1) + '/' + info.name
-    res[key] = path.resolve(file)
-    return res
-  }, {})
+    var info = path.parse(file);
+    var key = `${info.dir.slice(rootSrc.length + 1)}/${info.name}`;
+    res[key] = path.resolve(file);
+    return res;
+  }, {});
 }
 
-const appEntry = { app: resolve('./src/main.js') }
-const pagesEntry = getEntry(resolve('./src'), 'pages/**/main.js')
-const entry = Object.assign({}, appEntry, pagesEntry)
+const appEntry = { app: resolve('./src/main.js') };
+const pagesEntry = getEntry(resolve('./src'), 'pages/**/main.js');
+const entry = Object.assign({}, appEntry, pagesEntry);
 
 module.exports = {
   // 如果要自定义生成的 dist 目录里面的文件路径，
@@ -33,17 +33,20 @@ module.exports = {
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
-    publicPath: process.env.NODE_ENV === 'production'
-      ? config.build.assetsPublicPath
-      : config.dev.assetsPublicPath
+    publicPath:
+      process.env.NODE_ENV === 'production'
+        ? config.build.assetsPublicPath
+        : config.dev.assetsPublicPath,
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
-      'vue': 'mpvue',
-      '@': resolve('src')
+      vue: 'mpvue',
+      '@': resolve('src'),
+      flyio: 'flyio/dist/npm/wx',
+      wx: resolve('src/utils/wx'),
     },
-    symlinks: false
+    symlinks: false,
   },
   module: {
     rules: [
@@ -53,13 +56,13 @@ module.exports = {
         enforce: 'pre',
         include: [resolve('src'), resolve('test')],
         options: {
-          formatter: require('eslint-friendly-formatter')
-        }
+          formatter: require('eslint-friendly-formatter'),
+        },
       },
       {
         test: /\.vue$/,
         loader: 'mpvue-loader',
-        options: vueLoaderConfig
+        options: vueLoaderConfig,
       },
       {
         test: /\.js$/,
@@ -69,38 +72,36 @@ module.exports = {
           {
             loader: 'mpvue-loader',
             options: {
-              checkMPEntry: true
-            }
+              checkMPEntry: true,
+            },
           },
-        ]
+        ],
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: utils.assetsPath('img/[name].[ext]')
-        }
+          name: utils.assetsPath('img/[name].[ext]'),
+        },
       },
       {
         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: utils.assetsPath('media/[name]].[ext]')
-        }
+          name: utils.assetsPath('media/[name]].[ext]'),
+        },
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: utils.assetsPath('fonts/[name].[ext]')
-        }
-      }
-    ]
+          name: utils.assetsPath('fonts/[name].[ext]'),
+        },
+      },
+    ],
   },
-  plugins: [
-    new MpvuePlugin()
-  ]
-}
+  plugins: [new MpvuePlugin()],
+};
