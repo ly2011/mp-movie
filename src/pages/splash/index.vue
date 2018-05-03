@@ -44,8 +44,8 @@ export default {
       console.log('click start');
 
       // TODO: 访问历史的问题
-      wx.navigateTo({
-        url: '../index/main'
+      wx.switchTab({
+        url: '../board/main'
       });
     },
     async getInitData() {

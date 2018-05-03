@@ -5,12 +5,12 @@ module.exports = {
   parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 6,
-    sourceType: 'module',
+    sourceType: 'module'
   },
   env: {
     browser: false,
     node: true,
-    es6: true,
+    es6: true
   },
   extends: 'airbnb-base',
   // required to lint *.vue files
@@ -19,9 +19,9 @@ module.exports = {
   settings: {
     'import/resolver': {
       webpack: {
-        config: 'build/webpack.base.conf.js',
-      },
-    },
+        config: 'build/webpack.base.conf.js'
+      }
+    }
   },
   // add your custom rules here
   rules: {
@@ -31,15 +31,15 @@ module.exports = {
       'always',
       {
         js: 'never',
-        vue: 'never',
-      },
+        vue: 'never'
+      }
     ],
     // allow optionalDependencies
     'import/no-extraneous-dependencies': [
       'error',
       {
-        optionalDependencies: ['test/unit/index.js'],
-      },
+        optionalDependencies: ['test/unit/index.js']
+      }
     ],
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
@@ -53,12 +53,14 @@ module.exports = {
     'import/no-named-as-default': 0,
     'import/no-unresolved': 0,
     'import/prefer-default-export': 0,
+    'comma-dangle': 0,
+    'no-param-reassign': 0
   },
   globals: {
     App: true,
     Page: true,
     wx: true,
     getApp: true,
-    getPage: true,
-  },
+    getPage: true
+  }
 };
