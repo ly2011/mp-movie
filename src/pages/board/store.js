@@ -11,9 +11,9 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
     boards: [
-      // { key: 'top250' },
-      // { key: 'us_box' },
-      // { key: 'in_theaters' },
+      { key: 'top250' },
+      { key: 'us_box' },
+      { key: 'in_theaters' },
       { key: 'coming_soon' }
     ],
     movies: []
