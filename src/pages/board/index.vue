@@ -3,7 +3,7 @@
     <view class="md-board__slide">
       <swiper class="md-board__swiper" :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000">
         <swiper-item v-for="(movie, index) in movies" :key="index">
-          <image class="md-board__slide-image" :src="movie.images.large" mode="aspectFill" />
+          <image class="md-board__slide-image" :src="movie.images.large" mode="aspectFit" />
         </swiper-item>
       </swiper>
     </view>
@@ -22,7 +22,7 @@
             <view class="md-board__inner" v-if="item.key !== 'us_box'">
               <navigator v-for="(movie, i) in item.movies" :key="movie.id + index + i" :url="'../item/main?id='+movie.id">
                 <view class="md-board__movie">
-                  <image class="md-board__movie-image" :src="movie.images.large" mode="aspectFill" />
+                  <image class="md-board__movie-image" :src="movie.images.large" mode="aspectFit" />
                   <text class="md-board__movie-text">{{movie.title}}</text>
                 </view>
               </navigator>
@@ -30,7 +30,7 @@
             <view class="md-board__inner" v-else>
               <navigator v-for="(movie, i) in item.movies" :key="movie.rank + index + i" :url="'../item/main?id='+movie.subject.id">
                 <view class="md-board__movie">
-                  <image class="md-board__movie-image" :src="movie.subject.images.large" mode="aspectFill" />
+                  <image class="md-board__movie-image" :src="movie.subject.images.large" mode="aspectFit" />
                   <text class="md-board__movie-text">{{movie.subject.title}}</text>
                 </view>
               </navigator>

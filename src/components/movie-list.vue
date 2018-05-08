@@ -13,7 +13,7 @@
       </template>
       <view class="md-movie-list__tips">
         <view v-if="hasMore">
-          <image class="md-movie-list__tips-image" src="/static/images/loading.gif" mode="aspectFill" />
+          <image class="md-movie-list__tips-image" src="/static/images/loading.gif" mode="aspectFit" />
           <text class="md-movie-list__tips-text">正在加载中...</text>
         </view>
         <view v-else>

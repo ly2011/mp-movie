@@ -54,7 +54,8 @@ module.exports = {
     'import/no-unresolved': 0,
     'import/prefer-default-export': 0,
     'comma-dangle': 0,
-    'no-param-reassign': 0
+    'no-param-reassign': 0,
+    'consistent-return': 0
   },
   globals: {
     App: true,
