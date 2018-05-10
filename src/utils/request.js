@@ -7,6 +7,8 @@ const request = new Fly();
 request.config.timeout = 10 * 1000;
 
 console.log('METHOD: ', process.env); // 不知为何cross-env METHOD=proxy1 不生效
+const TARGET = process.env.npm_lifecycle_event;
+console.log('TARGET: ', TARGET);
 
 if (process.env.METHOD === 'proxy1') {
   request.config.baseURL = 'http://localhost:3001/douban'; // 本地代理1(100次/小时)
@@ -15,7 +17,7 @@ if (process.env.METHOD === 'proxy1') {
 } else if (process.env.METHOD === 'nginx') {
   request.config.baseURL = 'https://movie.douban.gusaifei.com/v2/movie'; // nginx 代理(100次/小时)
 } else {
-  request.config.baseURL = 'http://localhost:3001/douban'; // 本地代理1(100次/小时)
+  request.config.baseURL = 'https://movie.douban.gusaifei.com/v2/movie'; // 本地代理1(100次/小时)
 }
 
 // eslint-disable-next-line
@@ -33,10 +35,10 @@ request.interceptors.response.use(
     wx.hideLoading();
     wx.showToast({
       title: err.message,
-      icon: 'none',
+      icon: 'none'
     });
     return promise.resolve();
-  },
+  }
 );
 
 export default request;

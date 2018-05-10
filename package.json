@@ -9,6 +9,7 @@
     "dev:proxy1": "cross-env METHOD=proxy1 npm-run-all --parallel dev proxy1",
     "dev:proxy2": "cross-env METHOD=proxy2 npm-run-all --parallel dev proxy2",
     "dev:nginx": "cross-env METHOD=nginx npm run dev",
+    "dev:douban": "npm run dev",
     "start": "npm run dev:proxy1",
     "build": "rimraf dist && node build/build.js",
     "lint": "eslint --ext .js,.vue src",
